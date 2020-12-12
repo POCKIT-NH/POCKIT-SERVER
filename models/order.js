@@ -31,7 +31,20 @@ const order_tb = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      cart_idx: {
+      idx: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      count: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      total: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      isCart: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
