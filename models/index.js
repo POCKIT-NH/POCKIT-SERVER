@@ -15,14 +15,24 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.User = require('./user')(sequelize, Sequelize);
-db.Cart = require('./cart')(sequelize, Sequelize);
 db.Order = require('./order')(sequelize, Sequelize);
 db.Product = require('./product')(sequelize, Sequelize);
+db.CartProduct = require('./order_product')(sequelize, Sequelize);
 
-db.Order.hasOne(db.Cart, { foreignKey: 'cart_idx' });
-db.Cart.hasMany(db.Product, { foreignKey: 'product_idx' });
+db.Order.belongsToMany(db.Product, {
+  through: 'order_product_tb',
+  as: 'carting',
+  foreignKey: {
+    fieldName: 'product_idx',
+  },
+});
 
-db.Product.belongsTo(db.Cart, { foreignKey: 'product_idx' });
-db.Cart.belongsTo(db.Order, { foreignKey: 'cart_idx' });
+db.Product.belongsToMany(db.Order, {
+  through: 'order_product_tb',
+  as: 'carted',
+  foreignKey: {
+    fieldName: 'order_idx',
+  },
+});
 
 module.exports = db;
