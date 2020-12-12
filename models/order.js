@@ -31,11 +31,6 @@ const order_tb = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      idx: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       count: {
         type: DataTypes.INTEGER,
         allowNull: false,
