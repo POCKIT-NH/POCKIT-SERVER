@@ -12,3 +12,10 @@ exports.today = async (req, res) => {
     throw err;
   }
 };
+
+exports.recommend = async (req, res) => {
+  try {
+  } catch (err) {
+    throw err;
+  }
+};
