@@ -28,7 +28,7 @@ const order_tb = (sequelize, DataTypes) => {
         allowNull: false,
       },
       order_date: {
-        type: DataTypes.DATETIME,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       cart_idx: {

@@ -1,8 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const { sequelize } = require('./models');
+
+sequelize
+  .sync({ alter: true })
+  .then(() => {
+    console.log('DB 연결 성공');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 var indexRouter = require('./routes/index');
 
