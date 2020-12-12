@@ -20,11 +20,11 @@ const user_tb = (sequelize, DataTypes) => {
         allowNull: true,
       },
       name: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(10),
         allowNull: false,
       },
       phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(40),
         allowNull: false,
       },
       point: {
