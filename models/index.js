@@ -19,20 +19,8 @@ db.Order = require('./order')(sequelize, Sequelize);
 db.Product = require('./product')(sequelize, Sequelize);
 db.OrderProduct = require('./order_product')(sequelize, Sequelize);
 
-db.Order.belongsToMany(db.Product, {
-  through: 'order_product_tb',
-  as: 'carting',
-  foreignKey: {
-    fieldName: 'product_idx',
-  },
-});
-
-db.Product.belongsToMany(db.Order, {
-  through: 'order_product_tb',
-  as: 'carted',
-  foreignKey: {
-    fieldName: 'order_idx',
-  },
-});
+//order와 user는 1:N관계. user는 여러개의 order를 가질 수 있다.
+db.User.hasMany(db.Order, { foreignKey: 'user_idx' });
+db.Order.belongsTo(db.User, { foreignKey: 'user_idx' });
 
 module.exports = db;
