@@ -5,19 +5,19 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const { sequelize } = require('./models');
-const { swaggerUi, specs
-
-} = require('./swagger/config');
+const { swaggerUi, specs } = require('./swagger/config');
 var indexRouter = require('./routes/index');
 
 sequelize
-  .sync({ alter: true })
+  .sync({ alter: false })
   .then(() => {
     console.log('DB 연결 성공');
   })
   .catch((err) => {
     console.error(err);
   });
+
+var indexRouter = require('./routes/index');
 
 var app = express();
 

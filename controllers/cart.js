@@ -5,13 +5,11 @@ const { au, sc, rm } = require('../modules/utils');
  * cart 정보 불러오기
  */
 exports.getCart = async (req, res) => {
-  const { email, pwd } = req.body;
-
   try {
-    const todayInfo = await cartService.getTodayProduct({ email, pwd });
+    const cartInfo = await cartService.getCart();
 
-    todayInfo
-      ? res.status(sc.OK).send(au.successTrue(rm.DB_SUCCESS, todayInfo))
+    cartInfo
+      ? res.status(sc.OK).send(au.successTrue(rm.DB_SUCCESS, cartInfo))
       : res.status(sc.BAD_REQUEST).send(au.successFalse(rm.DB_NOT_MATCHED_ERROR));
   } catch (err) {
     throw err;
@@ -22,14 +20,14 @@ exports.getCart = async (req, res) => {
  * cart에 들어갈 상품 정보 DB에 저장
  */
 exports.pushCart = async (req, res) => {
-  const { count, total, product_idx } = req.body;
+  const { count, product_idx } = req.body;
 
-  if (!count || !total || !product_idx) {
+  if (!count || !product_idx) {
     return res.status(sc.BAD_REQUEST).send(au.successFalse(rm.NULL_VALUE));
   }
 
   try {
-    const pushCheck = await cartService.pushCart({ count, total, product_idx });
+    const pushCheck = await cartService.pushCart({ count, product_idx });
 
     pushCheck
       ? res.status(sc.OK).send(au.successTrue(rm.DB_REGISTER_OK))
