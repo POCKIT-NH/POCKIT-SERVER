@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { sequelize } = require('./models');
+const { swaggerUi, specs } = require('./swagger/config');
 
 sequelize
   .sync({ alter: true })
@@ -13,15 +14,15 @@ sequelize
   .catch((err) => {
     console.error(err);
   });
-
-var indexRouter = require('./routes/index');
-
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
+  var indexRouter = require('./routes/index');
+  
+  var app = express();
+  
+  // view engine setup
+  app.set('views', path.join(__dirname, 'views'));
+  app.set('view engine', 'jade');
+  
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
