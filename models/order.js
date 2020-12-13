@@ -9,15 +9,15 @@ const order_tb = (sequelize, DataTypes) => {
       },
       name: {
         type: DataTypes.STRING(100),
-        allowNull: false,
+        allowNull: true,
       },
       phone: {
         type: DataTypes.STRING(20),
-        allowNull: false,
+        allowNull: true,
       },
       addr: {
         type: DataTypes.STRING(20),
-        allowNull: false,
+        allowNull: true,
       },
       isPay: {
         type: DataTypes.INTEGER,
@@ -25,11 +25,11 @@ const order_tb = (sequelize, DataTypes) => {
       },
       order_num: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       order_date: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       count: {
         type: DataTypes.INTEGER,
@@ -41,6 +41,7 @@ const order_tb = (sequelize, DataTypes) => {
       },
       isCart: {
         type: DataTypes.INTEGER,
+        defaultValue: 0,
         allowNull: true,
       },
     },

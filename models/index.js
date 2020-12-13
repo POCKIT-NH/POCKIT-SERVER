@@ -17,7 +17,7 @@ db.Sequelize = Sequelize;
 db.User = require('./user')(sequelize, Sequelize);
 db.Order = require('./order')(sequelize, Sequelize);
 db.Product = require('./product')(sequelize, Sequelize);
-db.CartProduct = require('./order_product')(sequelize, Sequelize);
+db.OrderProduct = require('./order_product')(sequelize, Sequelize);
 
 db.Order.belongsToMany(db.Product, {
   through: 'order_product_tb',
