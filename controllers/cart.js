@@ -22,13 +22,13 @@ exports.getCart = async (req, res) => {
  * cart에 들어갈 상품 정보 DB에 저장
  */
 exports.pushCart = async (req, res) => {
-  const { email, pwd } = req.body;
+  const { count, total, product_idx } = req.body;
 
   try {
-    const todayInfo = await cartService.getTodayProduct({ email, pwd });
+    const pushCheck = await cartService.pushCart({ count, total, product_idx });
 
-    todayInfo
-      ? res.status(sc.OK).send(au.successTrue(rm.DB_SUCCESS, todayInfo))
+    pushCheck
+      ? res.status(sc.OK).send(au.successTrue(rm.DB_REGISTER_OK, todayInfo))
       : res.status(sc.BAD_REQUEST).send(au.successFalse(rm.DB_NOT_MATCHED_ERROR));
   } catch (err) {
     throw err;

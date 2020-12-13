@@ -6,7 +6,6 @@ router.use('/user', require('./user'));
 router.use('/home', require('./home'));
 router.use('/detail', require('./detail'));
 router.use('/order', require('./order'));
-router.use('/nhpay', require('./nhpay'));
 router.use('/cart', require('./cart'));
 router.use('/forest', require('./forest'));
 
