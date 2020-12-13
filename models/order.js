@@ -1,3 +1,5 @@
+const { User } = require('.');
+
 const order_tb = (sequelize, DataTypes) => {
   return sequelize.define(
     'order_tb',
@@ -21,6 +23,7 @@ const order_tb = (sequelize, DataTypes) => {
       },
       isPay: {
         type: DataTypes.INTEGER,
+        defaultValue: 0,
         allowNull: false,
       },
       order_num: {

@@ -24,11 +24,15 @@ exports.getCart = async (req, res) => {
 exports.pushCart = async (req, res) => {
   const { count, total, product_idx } = req.body;
 
+  if (!count || !total || !product_idx) {
+    return res.status(sc.BAD_REQUEST).send(au.successFalse(rm.NULL_VALUE));
+  }
+
   try {
     const pushCheck = await cartService.pushCart({ count, total, product_idx });
 
     pushCheck
-      ? res.status(sc.OK).send(au.successTrue(rm.DB_REGISTER_OK, todayInfo))
+      ? res.status(sc.OK).send(au.successTrue(rm.DB_REGISTER_OK))
       : res.status(sc.BAD_REQUEST).send(au.successFalse(rm.DB_NOT_MATCHED_ERROR));
   } catch (err) {
     throw err;

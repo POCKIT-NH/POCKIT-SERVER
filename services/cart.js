@@ -14,33 +14,28 @@ exports.getCart = async (data) => {
 
 exports.pushCart = async (data) => {
   try {
-    const product_idx = await Product.findOne({ where: { idx: data.product_idx } });
-
     //order 테이블에 수량, 개수 삽입
-    const newOrder = await Order.create({
-      count: data.count,
-      total: data.total,
-    }).complete(function (err, result) {
-      if (err) {
-        return callback(0);
-      } else {
-        return callback(result.idx); // This is generate primary key.
-      }
+    const newOrder_idx = await Order.create(
+      {
+        count: data.count,
+        total: data.total,
+        isCart: 1, //isCart: true로 삽입
+        user_idx: 1, //user는 1로 고정
+      },
+      { fields: ['count', 'total', 'isCart'] }
+    ).then(function (result) {
+      return result.idx;
     });
-
-    // const product_idx = await Product.findOne({ where: { idx: data.product_idx } });
 
     //productIdx와 orderIdx를 orderProduct 테이블에 삽입
-    const newOrderProduct = await OrderProduct.create({
-      product_idx: product_idx,
-      order_idx: order_idx,
+    const newOrderProduct_idx = await OrderProduct.create({
+      product_idx: data.product_idx,
+      order_idx: newOrder_idx,
+    }).then(function (result) {
+      return result.idx;
     });
 
-    const cartInfo = await Cart.findAll({
-      where: { id: { in: [1, 2, 3, 4] } },
-    });
-
-    return cartInfo.dataValues;
+    return newOrderProduct_idx ? true : false;
   } catch (err) {
     throw err;
   }
