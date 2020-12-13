@@ -38,8 +38,9 @@ exports.getCart = async (data) => {
 
 exports.pushCart = async (data) => {
   try {
+    const user_idx = 1;
     const oldOrder_idx = await Order.findOne({ where: { user_idx: 1, isCart: 1 } });
-    if (oldOrder_idx.dataValues) {
+    if (oldOrder_idx) {
       //order 테이블에 수량, 개수 삽입
       //productIdx와 orderIdx를 orderProduct 테이블에 삽입
       const newOrderProduct_idx = await OrderProduct.create({
@@ -55,9 +56,8 @@ exports.pushCart = async (data) => {
       //order 테이블에 수량, 개수 삽입
       const newOrder_idx = await Order.create(
         {
-          total: data.total,
           isCart: 1, //isCart: true로 삽입
-          user_idx: 1, //user는 1로 고정
+          user_idx: user_idx,
         },
         { fields: ['count', 'total', 'isCart'] }
       ).then(function (result) {
