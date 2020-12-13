@@ -1,8 +1,13 @@
-const express = require('express');
-const router = express.Router();
+const { Product } = require('../models/index');
 
-const detailController = require('../controllers/detail');
-
-router.get('/', detailController.getSeries);
-
-module.exports = router;
+exports.getProductDetail = async (productIdx) => {
+  try {
+    const product = await Product.findAll({
+      attributes: ['idx', 'title', 'product_img', 'price'],
+      where: { idx: productIdx },
+    });
+    return product;
+  } catch (err) {
+    throw err;
+  }
+};

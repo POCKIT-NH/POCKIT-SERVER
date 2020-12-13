@@ -4,16 +4,16 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const { sequelize } = require('./models');
+const { swaggerUi, specs } = require('./swagger/config');
 
 sequelize
-  .sync({ alter: true })
+  .sync({ alter: false })
   .then(() => {
     console.log('DB 연결 성공');
   })
   .catch((err) => {
     console.error(err);
   });
-
 var indexRouter = require('./routes/index');
 
 var app = express();
@@ -22,6 +22,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

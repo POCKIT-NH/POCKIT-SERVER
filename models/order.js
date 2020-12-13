@@ -1,3 +1,5 @@
+const { User } = require('.');
+
 const order_tb = (sequelize, DataTypes) => {
   return sequelize.define(
     'order_tb',
@@ -9,31 +11,41 @@ const order_tb = (sequelize, DataTypes) => {
       },
       name: {
         type: DataTypes.STRING(100),
-        allowNull: false,
+        allowNull: true,
       },
       phone: {
         type: DataTypes.STRING(20),
-        allowNull: false,
+        allowNull: true,
       },
       addr: {
         type: DataTypes.STRING(20),
-        allowNull: false,
+        allowNull: true,
       },
       isPay: {
         type: DataTypes.INTEGER,
+        defaultValue: 0,
         allowNull: false,
       },
       order_num: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       order_date: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
       },
-      cart_idx: {
+      total: {
         type: DataTypes.INTEGER,
         allowNull: true,
+      },
+      isCart: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull: true,
+      },
+      user_idx: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
     },
     {

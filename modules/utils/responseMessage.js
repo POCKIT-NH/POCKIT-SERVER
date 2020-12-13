@@ -48,4 +48,7 @@ module.exports = {
   TICKET_REGISTER_FAIL: '티켓 등록 실패',
   SHOW_INFO_SUCCESS: '공연 정보 불러오기 성공',
   SHOW_INFO_FAIL: '공연 정보 불러오기 실패~!',
+
+  // register
+  DB_REGISTER_OK: '등록 성공',
 };

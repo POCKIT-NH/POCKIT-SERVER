@@ -1,21 +1,21 @@
-const cart_tb = (sequelize, DataTypes) => {
+const order_product_tb = (sequelize, DataTypes) => {
   return sequelize.define(
-    'cart_tb',
+    'order_product_tb',
     {
       idx: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      count: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      total: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       product_idx: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      order_idx: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      count: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
@@ -28,4 +28,4 @@ const cart_tb = (sequelize, DataTypes) => {
   );
 };
 
-module.exports = cart_tb;
+module.exports = order_product_tb;

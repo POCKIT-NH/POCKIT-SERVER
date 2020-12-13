@@ -1,9 +1,19 @@
-const express = require('express');
-const router = express.Router();
+const { Product } = require('../models/index');
 
-const homeController = require('../controllers/home');
+exports.getTodayProduct = async (data) => {
+  try {
+    const todayProduct = await Product.findAll({
+      where: { idx: [1, 2, 3, 4] },
+    });
 
-router.get('/curation', homeController.getSeries);
-router.get('/today', homeController.getSeries);
+    let todayArray = new Array();
 
-module.exports = router;
+    todayProduct.map(async (product) => {
+      todayArray.push(product.dataValues);
+    });
+
+    return todayArray[0] ? todayArray : undefined;
+  } catch (err) {
+    throw err;
+  }
+};
