@@ -28,7 +28,7 @@ exports.pushCart = async (data) => {
       }
     });
 
-    const product_idx = await Product.findOne({ where: { idx: data.product_idx } });
+    // const product_idx = await Product.findOne({ where: { idx: data.product_idx } });
 
     //productIdx와 orderIdx를 orderProduct 테이블에 삽입
     const newOrderProduct = await OrderProduct.create({
