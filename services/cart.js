@@ -1,31 +1,34 @@
 const { Order, OrderProduct, Product } = require('../models/index');
 
 exports.getCart = async (data) => {
+  let result = {
+    user_idx: 1,
+    order_idx: 1,
+    delivery_date: '2020-12-19',
+    delivery_price: 3000,
+  };
+  const orderProduct = await OrderProduct.findAll({
+    where: { order_idx: 1 },
+  });
+
   try {
-    // orderProduct 테이블에서 order_idx인 값들을 가져온다.
-    const orderProduct = await OrderProduct.findAll({
-      where: { order_idx: 1 },
-    });
-
-    let result = {
-      user_idx: 1,
-      order_idx: 1,
-      product: [],
-      delivery_date: '2020-12-19',
-      delivery_price: 3000,
-    };
-
-    orderProduct.map(async (product) => {
+    product_test = [];
+    for await (let product of orderProduct) {
+      const productList = product.dataValues;
       const productInfo = await Product.findOne({
-        where: { idx: product.dataValues.product_idx },
+        where: { idx: productList.product_idx },
       });
 
-      let countPrice = productInfo.dataValues.price * product.dataValues.count;
-      productInfo.dataValues.price = countPrice;
-      productInfo.dataValues.count = product.dataValues.count;
+      // 상품별 가격 계산
+      let countPrice = productList.price * productList.count;
 
-      result.product.push(productInfo.dataValues);
-    });
+      productInfo.dataValues.price = countPrice;
+      productInfo.dataValues.count = productList.count;
+
+      product_test.push(productInfo.dataValues);
+    }
+
+    result.product = product_test;
 
     return result.product[0] ? result : undefined;
   } catch (err) {
