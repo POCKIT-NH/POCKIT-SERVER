@@ -1,0 +1,21 @@
+tags:
+  name: product
+definitions:
+  product:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: 제품 고유 번호
+      title:
+        type: string
+        description: 제품 이름
+      product_img:
+        type: string
+        description: 제품 메인 이미지
+      category:
+        type: string
+        description: 제품 카테고리
+      price:
+        type: integer
+        description: 제품 가격
