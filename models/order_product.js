@@ -1,5 +1,3 @@
-const { Order, Product } = require('.');
-
 const order_product_tb = (sequelize, DataTypes) => {
   return sequelize.define(
     'order_product_tb',
@@ -11,17 +9,11 @@ const order_product_tb = (sequelize, DataTypes) => {
       },
       product_idx: {
         type: DataTypes.INTEGER,
-        reference: {
-          model: Product,
-          key: 'idx',
-        },
+        allowNull: false,
       },
       order_idx: {
         type: DataTypes.INTEGER,
-        reference: {
-          model: Order,
-          key: 'idx',
-        },
+        allowNull: false,
       },
     },
     {
