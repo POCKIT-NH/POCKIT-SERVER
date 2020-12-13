@@ -34,10 +34,7 @@ const order_tb = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: true,
       },
-      count: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+
       total: {
         type: DataTypes.INTEGER,
         allowNull: false,
