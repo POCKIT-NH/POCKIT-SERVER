@@ -5,13 +5,11 @@ const { au, sc, rm } = require('../modules/utils');
  * cart 정보 불러오기
  */
 exports.getCart = async (req, res) => {
-  const { email, pwd } = req.body;
-
   try {
-    const todayInfo = await cartService.getTodayProduct({ email, pwd });
+    const cartInfo = await cartService.getCart();
 
-    todayInfo
-      ? res.status(sc.OK).send(au.successTrue(rm.DB_SUCCESS, todayInfo))
+    cartInfo
+      ? res.status(sc.OK).send(au.successTrue(rm.DB_SUCCESS, cartInfo))
       : res.status(sc.BAD_REQUEST).send(au.successFalse(rm.DB_NOT_MATCHED_ERROR));
   } catch (err) {
     throw err;
