@@ -7,7 +7,7 @@ const { sequelize } = require('./models');
 const { swaggerUi, specs } = require('./swagger/config');
 
 sequelize
-  .sync({ alter: true })
+  .sync({ alter: false })
   .then(() => {
     console.log('DB 연결 성공');
   })
