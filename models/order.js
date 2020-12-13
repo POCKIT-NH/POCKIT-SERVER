@@ -36,12 +36,16 @@ const order_tb = (sequelize, DataTypes) => {
       },
       total: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       isCart: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
         allowNull: true,
+      },
+      user_idx: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
     },
     {
