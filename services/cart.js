@@ -3,12 +3,12 @@ const { Order, OrderProduct, Product } = require('../models/index');
 exports.getCart = async (data) => {
   let result = {
     user_idx: 1,
-    order_idx: 1,
+    order_idx: 6,
     delivery_date: '2020-12-19',
     delivery_price: 3000,
   };
   const orderProduct = await OrderProduct.findAll({
-    where: { order_idx: 1 },
+    where: { order_idx: 6 },
   });
 
   try {
@@ -20,7 +20,7 @@ exports.getCart = async (data) => {
       });
 
       // 상품별 가격 계산
-      let countPrice = productList.price * productList.count;
+      let countPrice = productInfo.dataValues.price * productList.count;
 
       productInfo.dataValues.price = countPrice;
       productInfo.dataValues.count = productList.count;
