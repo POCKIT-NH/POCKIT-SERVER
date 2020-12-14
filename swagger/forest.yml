@@ -1,0 +1,15 @@
+tags:
+  name: forest
+definitions:
+  schema:
+    type: object
+    properties:
+      success:
+        type: boolean
+      message:
+        type: string
+        example: "DB 조회 성공"
+      data:
+        type: string
+        example: "18"
+      

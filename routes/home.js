@@ -17,6 +17,6 @@ const homeController = require('../controllers/home');
  *        description: 제품 조회 성공
  */
 router.get('/today', homeController.today);
-router.get('/recommend', homeController.recommend);
+// router.get('/recommend', homeController.recommend);
 
 module.exports = router;
