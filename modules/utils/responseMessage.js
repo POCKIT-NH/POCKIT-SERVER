@@ -34,4 +34,19 @@ module.exports = {
   LOGIN_AGAIN: '다시 로그인하세요',
   ARTIST_SUCCESS: '아티스트 정보 가져오기 성공',
   ARTIST_FAIL: '아티스트 정보 가져오기 실패',
+
+  // nhpay
+  ISSUE_FIN_ACCOUNT_SUCCESS: '핀-어카운트 발급',
+  PAY_SUCCESS: '결제 완료',
+
+  //auth
+  AUTH_TRUE: '권한이 있습니다.',
+  EMAIL_SEND_SUCCESS: '이메일 전송완료',
+  EMAIL_SEND_FAIL: '이메일 전송 실패',
+  EMAIL_DUPLICATED_FAIL: '이미 가입되어있는 이메일입니다.',
+  EMAIL_AUTH_SUCCESS: '이메일 인증완료',
+  EMAIL_AUTH_FAIL: '이메일 인증 실패',
+
+  // register
+  DB_REGISTER_OK: '등록 성공',
 };
