@@ -36,7 +36,9 @@ exports.forest = async (req, res) => {
           Iscd: process.env.ISCD,
           FintechApsno: '001',
           ApiSvcCd: 'ReceivedTransferA',
+
           IsTuno: randIdForIsTuno,
+
           AccessToken: process.env.ACCESS_TOKEN,
         },
         Bncd: '011',
@@ -50,12 +52,14 @@ exports.forest = async (req, res) => {
       },
     });
     const totalCnt = parseInt(result.data.TotCnt);
+
     const rate = parseInt(totalCnt) * 0.08;
     const point = Math.ceil(totalCnt + rate);
 
     const total = await forestService.point(point);
     console.log(total);
     total == false ? res.status(sc.BAD_REQUEST).send(au.successFalse(rm.DB_NO_CHANGE)) : res.status(sc.OK).send(au.successTrue(rm.DB_SUCCESS, total));
+
   } catch (err) {
     throw err;
   }

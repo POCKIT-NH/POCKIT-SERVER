@@ -3,6 +3,7 @@ const router = express.Router();
 
 const forestController = require('../controllers/forest');
 
+
 /**
  * @swagger
  *  /forest:
@@ -28,6 +29,7 @@ const forestController = require('../controllers/forest');
  *              example: 18
  *
  */
+
 router.get('/', forestController.forest);
 
 module.exports = router;
