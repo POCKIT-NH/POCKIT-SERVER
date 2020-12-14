@@ -3,8 +3,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const bodyParser = require('body-parser');
 const { sequelize } = require('./models');
 const { swaggerUi, specs } = require('./swagger/config');
+var indexRouter = require('./routes/index');
 
 sequelize
   .sync({ alter: false })
@@ -14,6 +16,7 @@ sequelize
   .catch((err) => {
     console.error(err);
   });
+
 var indexRouter = require('./routes/index');
 
 var app = express();
