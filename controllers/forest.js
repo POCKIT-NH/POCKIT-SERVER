@@ -1,7 +1,7 @@
 const forestService = require('../services/forest');
 const { au, sc, rm } = require('../modules/utils');
 const axios = require('axios');
-let rand = Math.random() * 1000;
+let rand = Math.random() * 200;
 require('dotenv').config();
 
 function getToday() {
@@ -40,11 +40,12 @@ exports.forest = async (req, res) => {
       },
     });
     const totalCnt = parseInt(result.data.TotCnt);
-    const rate = parseInt(totalCnt) * 8;
-    const point = totalCnt + rate;
+    const rate = parseInt(totalCnt) * 0.08;
+    const point = Math.ceil(totalCnt + rate);
+    console.log(result);
 
     const total = await forestService.point(point);
-    total ? res.status(sc.OK).send(au.successTrue(rm.DB_SUCCESS, total)) : res.status(sc.BAD_REQUEST).send(au.successFalse(rm.DB_NO_CHANGE));
+    total == false ? res.status(sc.BAD_REQUEST).send(au.successFalse(rm.DB_NO_CHANGE)) : res.status(sc.OK).send(au.successTrue(rm.DB_SUCCESS, total));
   } catch (err) {
     throw err;
   }

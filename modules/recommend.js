@@ -1,86 +1,26 @@
 const ContentBasedRecommender = require('content-based-recommender');
-const { User, Product } = require('../models/index');
-const posts = [
-  {
-    id: '1000001',
-    content: 'Why studying javascript is fun?',
-  },
-  {
-    id: '1000002',
-    content: 'The trend for javascript in machine learning',
-  },
-  {
-    id: '1000003',
-    content: 'The most insightful stories about JavaScript',
-  },
-  {
-    id: '1000004',
-    content: 'Introduction to Machine Learning',
-  },
-  {
-    id: '1000005',
-    content: 'Machine learning and its application',
-  },
-  {
-    id: '1000006',
-    content: 'Python vs Javascript, which is better?',
-  },
-  {
-    id: '1000007',
-    content: 'How Python saved my life?',
-  },
-  {
-    id: '1000008',
-    content: 'The future of Bitcoin technology',
-  },
-  {
-    id: '1000009',
-    content: 'Is it possible to use javascript for machine learning?',
-  },
-];
+const { OrderProduct, Product } = require('../../models');
 
-const tags = [
-  {
-    id: '1',
-    content: 'Javascript',
-  },
-  {
-    id: '2',
-    content: 'machine learning',
-  },
-  {
-    id: '3',
-    content: 'application',
-  },
-  {
-    id: '4',
-    content: 'introduction',
-  },
-  {
-    id: '5',
-    content: 'future',
-  },
-  {
-    id: '6',
-    content: 'Python',
-  },
-  {
-    id: '7',
-    content: 'Bitcoin',
-  },
-];
+module.exports = async (user, page) => {
+  const recommender = new ContentBasedRecommender({
+    minScore: 0.1,
+    maxSimilarDocuments: 100,
+  });
 
-const tagMap = tags.reduce((acc, tag) => {
-  acc[tag.id] = tag;
-  return acc;
-}, {});
+  // order테이블의 user_idx=1 인 order_idx =6
+  // order-product 테이블에서 order_idx = 6인 product_idx들을 가져옴
+  let orderList = await OrderProduct.findAll(
 
-const recommender = new ContentBasedRecommender();
+    { where: { idx: 6 } });
+  // product 테이블에서 product_idx에 해당하는 category 를 가진 다른 음식들 추천
 
-recommender.trainBidirectional(posts, tags);
+  // documents를 
+  // start training
+  recommender.train(documents);
 
-for (let post of posts) {
-  const relatedTags = recommender.getSimilarDocuments(post.id);
-  const tags = relatedTags.map((t) => tagMap[t.id].content);
-  console.log(post.content, 'related tags:', tags);
-}
+  //get top 10 similar items to document
+  const similarDocuments = recommender.getSimilarDocuments(user._id, 0, 10);
+  console.log(similarDocuments);
+
+  return result.slice(0, page);
+};
