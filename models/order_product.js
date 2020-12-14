@@ -17,9 +17,8 @@ const order_product_tb = (sequelize, DataTypes) => {
       },
       count: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
-      
     },
     {
       //모델의 옵션들을 지정하는곳

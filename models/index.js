@@ -6,9 +6,9 @@ const moment = require('moment');
 const date = moment().format('YYYY[_]MM[_]DD');
 const time = moment().format('H:mm:ss');
 
-const log = fs.createWriteStream(`./log/sequelize/${date}.log`, {'flags': 'a'});
+const log = fs.createWriteStream(`./log/sequelize/${date}.log`, { flags: 'a' });
 log.write(`\n\n[${time}]\n`);
-config.logging = msg =>  log.write(`${msg}\n`);
+config.logging = (msg) => log.write(`${msg}\n`);
 
 const db = {};
 let sequelize;
@@ -27,17 +27,8 @@ db.Order = require('./order')(sequelize, Sequelize);
 db.Product = require('./product')(sequelize, Sequelize);
 db.OrderProduct = require('./order_product')(sequelize, Sequelize);
 
-//order와 user는 1:N관계. user는 여러개의 order를 가질 수 있다.
-db.User.hasMany(db.Order, { foreignKey: 'user_idx' });
-db.Order.belongsTo(db.User, { foreignKey: 'user_idx' });
-
 // log.write(content);
 module.exports = db;
-
-
-
-
-
 
 // 'use strict';
 

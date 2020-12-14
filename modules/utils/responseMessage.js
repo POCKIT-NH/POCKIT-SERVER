@@ -5,6 +5,7 @@ module.exports = {
   DB_NOT_MATCHED_ERROR: '해당 조건에 일치하는 데이터가 없습니다.',
   DB_DUPLICATE_ENTRY_ERROR: '중복되는 값이 이미 존재합니다',
   DB_SUCCESS: 'DB 조회 성공',
+  DB_NO_CHANGE: 'DB 값이 변경되지 않았습니다.',
 
   OUT_OF_VALUE: '파라미터 값이 잘못 되었습니다.',
   NULL_VALUE: '필요한 값이 없습니다.',

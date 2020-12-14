@@ -3,6 +3,6 @@ const router = express.Router();
 
 const forestController = require('../controllers/forest');
 
-// router.get('/', forestController.getSeries);
+router.get('/', forestController.forest);
 
 module.exports = router;
