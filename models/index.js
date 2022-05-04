@@ -6,7 +6,15 @@ const moment = require('moment');
 const date = moment().format('YYYY[_]MM[_]DD');
 const time = moment().format('H:mm:ss');
 
-const log = fs.createWriteStream(`./log/sequelize/${date}.log`, { flags: 'a' });
+const dir = './log2/sequelize/';
+
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir, {
+    recursive: true
+  });
+}
+
+const log = fs.createWriteStream(dir + `${date}.log`, { flags: 'a' });
 log.write(`\n\n[${time}]\n`);
 config.logging = (msg) => log.write(`${msg}\n`);
 
