@@ -6,7 +6,7 @@ const moment = require('moment');
 const date = moment().format('YYYY[_]MM[_]DD');
 const time = moment().format('H:mm:ss');
 
-const dir = './log2/sequelize/';
+const dir = './log/sequelize/';
 
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir, {
